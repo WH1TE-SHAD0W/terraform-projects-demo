@@ -1,5 +1,5 @@
 resource "azurerm_subnet" "app_subnet" {
-  address_prefixes     = [var.app_subnet_address]
+  address_prefixes     = var.app_subnet_address
   name                 = "${azurerm_virtual_network.vnet.name}-${var.app_subnet_name}"
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.vnet.name
@@ -28,7 +28,7 @@ locals {
 
 resource "azurerm_network_security_rule" "app_nsg_inbound_rule" {
     for_each = local.app_inbound_ports_map
-    name                        = "Rule-Port"
+    name                        = "Rule-Port-${each.value}"
     priority                    = each.key
     direction                   = "Inbound"
     access                      = "Allow"

@@ -27,7 +27,7 @@ locals {
 
 resource "azurerm_network_security_rule" "web_nsg_inbound_rule" {
   for_each = local.web_inbound_ports
-    name                        = "Rule-Port"
+    name                        = "Rule-Port-${each.value}"
     priority                    = each.key
     direction                   = "Inbound"
     access                      = "Allow"
