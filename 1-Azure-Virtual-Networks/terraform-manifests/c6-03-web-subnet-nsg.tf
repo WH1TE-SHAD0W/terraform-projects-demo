@@ -1,4 +1,4 @@
-resource "azurerm_subnet" "web-subnet" {
+resource "azurerm_subnet" "web_subnet" {
   address_prefixes     = var.web_subnet_address
   name                 = "${azurerm_virtual_network.vnet.name}-${var.web_subnet_name}"
   resource_group_name  = azurerm_resource_group.rg.name
@@ -7,13 +7,13 @@ resource "azurerm_subnet" "web-subnet" {
 
 resource "azurerm_network_security_group" "web_subnet_nsg" {
   location            = azurerm_resource_group.rg.location
-  name                = "${azurerm_subnet.web-subnet.name}-nsg"
+  name                = "${azurerm_subnet.web_subnet.name}-nsg"
   resource_group_name = azurerm_resource_group.rg.name
 }
 
 resource "azurerm_subnet_network_security_group_association" "web_subnet_nsg_association" {
   network_security_group_id = azurerm_network_security_group.web_subnet_nsg.id
-  subnet_id                 = azurerm_subnet.web-subnet.id
+  subnet_id                 = azurerm_subnet.web_subnet.id
   depends_on = [azurerm_network_security_rule.web_nsg_inbound_rule]
 }
 
