@@ -1,3 +1,4 @@
+/*
 resource "azurerm_network_security_group" "web-vm-nic-nsg" {
   location            = azurerm_resource_group.rg.location
   name                = "${azurerm_network_interface.web_linux_vm_nic.name}-nsg"
@@ -31,5 +32,6 @@ resource "azurerm_network_security_rule" "web-vm-nic-nsg-inbound-rule" {
     source_address_prefix       = "*"
     destination_address_prefix  = "*"
     resource_group_name         = azurerm_resource_group.rg.name
-    network_security_group_name = azurerm_network_security_group.app_subnet_nsg.name
+    network_security_group_name = azurerm_network_security_group.web-vm-nic-nsg.name
 }
+*/
