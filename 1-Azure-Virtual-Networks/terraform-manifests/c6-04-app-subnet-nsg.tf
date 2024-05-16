@@ -18,7 +18,7 @@ resource "azurerm_subnet_network_security_group_association" "app_subnet_nsg_ass
 }
 
 locals {
-  app_inbound_ports_map = {
+  app_inbound_ports = {
     "100" : "80", # If the key starts with a number, you must use the colon syntax ":" instead of "="
     "110" : "443",
     "120" : "8080",
@@ -27,7 +27,7 @@ locals {
 }
 
 resource "azurerm_network_security_rule" "app_nsg_inbound_rule" {
-    for_each = local.app_inbound_ports_map
+    for_each = local.app_inbound_ports
     name                        = "Rule-Port-${each.value}"
     priority                    = each.key
     direction                   = "Inbound"
