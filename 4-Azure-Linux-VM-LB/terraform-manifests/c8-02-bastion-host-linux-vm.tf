@@ -27,7 +27,7 @@ resource "azurerm_linux_virtual_machine" "bastion_linux_vm" {
   resource_group_name   = azurerm_resource_group.rg.name
   size                  = "Standard_DS1_v2"
   admin_ssh_key {
-    public_key = file("${path.module}/../ssh-keys/terraform-azure-linux-vm.pub")
+    public_key = file("${path.module}/../ssh-keys/terraform-azure-bastion-linux-vm.pub")
     username   = "bastion-host"
   }
   os_disk {
@@ -35,9 +35,9 @@ resource "azurerm_linux_virtual_machine" "bastion_linux_vm" {
     storage_account_type = "Standard_LRS"
   }
   source_image_reference {
-    offer     = "RHEL"
-    publisher = "RedHat"
-    sku       = "83-gen2"
+    offer     = "ubuntu-24_04-lts"
+    publisher = "Canonical"
+    sku       = "server"
     version   = "latest"
   }
 }
