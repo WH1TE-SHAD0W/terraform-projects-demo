@@ -17,21 +17,7 @@ resource "azurerm_network_interface" "bastion_linux_vm_nic" {
     subnet_id = azurerm_subnet.bastion_subnet.id
     public_ip_address_id = azurerm_public_ip.bastion_host_public_ip.id
   }
-}
-
-resource "azurerm_linux_virtual_machine" "bastion_linux_vm" {
-  admin_username        = "azureuser"
-  location              = azurerm_resource_group.rg.location
-  name                  = "${local.resource_name_prefix}-bastion-host-vm"
-  network_interface_ids = [azurerm_network_interface.bastion_linux_vm_nic.id]
-  resource_group_name   = azurerm_resource_group.rg.name
-  size                  = "Standard_DS1_v2"
-  admin_ssh_key {
-    public_key = file("${path.module}/../ssh-keys/terraform-azure-bastion-linux-vm.pub")
-    username   = "azureuser"
-  }
-  os_disk {
-    caching              = "ReadWrite"
+} 
     storage_account_type = "Standard_LRS"
   }
   source_image_reference {
