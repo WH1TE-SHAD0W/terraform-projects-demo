@@ -4,7 +4,7 @@ resource "null_resource" "null_ssh_key_bastion_host" {
     type = "ssh"
     host = azurerm_linux_virtual_machine.bastion_linux_vm.public_ip_address
     user = azurerm_linux_virtual_machine.bastion_linux_vm.admin_username
-    private_key = file("${path.module}/../ssh-keys/terraform-azure-web-linux-vm.pem")
+    private_key = file("${path.module}/../ssh-keys/terraform-azure-bastion-linux-vm.pem")
   }
   provisioner "file" {
     source = "${path.module}/../ssh-keys/terraform-azure-web-linux-vm.pem"

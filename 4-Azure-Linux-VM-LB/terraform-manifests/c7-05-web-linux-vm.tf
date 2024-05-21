@@ -17,7 +17,7 @@ locals {
 }
 
 resource "azurerm_linux_virtual_machine" "web_linux_vm" {
-  admin_username        = "azure-user"
+  admin_username        = "azureuser"
   location              = azurerm_resource_group.rg.location
   name                  = "${local.resource_name_prefix}-web-linux-vm"
   network_interface_ids = [azurerm_network_interface.web_linux_vm_nic.id]

@@ -20,7 +20,7 @@ resource "azurerm_network_interface" "bastion_linux_vm_nic" {
 }
 
 resource "azurerm_linux_virtual_machine" "bastion_linux_vm" {
-  admin_username        = "bastion-host"
+  admin_username        = "azureuser"
   location              = azurerm_resource_group.rg.location
   name                  = "${local.resource_name_prefix}-bastion-host-vm"
   network_interface_ids = [azurerm_network_interface.bastion_linux_vm_nic.id]
@@ -28,7 +28,7 @@ resource "azurerm_linux_virtual_machine" "bastion_linux_vm" {
   size                  = "Standard_DS1_v2"
   admin_ssh_key {
     public_key = file("${path.module}/../ssh-keys/terraform-azure-bastion-linux-vm.pub")
-    username   = "bastion-host"
+    username   = "azureuser"
   }
   os_disk {
     caching              = "ReadWrite"

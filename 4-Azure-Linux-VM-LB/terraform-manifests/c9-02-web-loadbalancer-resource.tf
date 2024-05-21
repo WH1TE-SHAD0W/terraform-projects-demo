@@ -30,17 +30,17 @@ resource "azurerm_lb_probe" "wen-lb-probe-80" {
 
 resource "azurerm_lb_rule" "web-lb-rule" {
   backend_port                   = 80
-  frontend_ip_configuration_name = azurerm_lb.web-lb.frontend_ip_configuration.name
+  frontend_ip_configuration_name = azurerm_lb.web-lb.frontend_ip_configuration[0].name
   frontend_port                  = 80
   loadbalancer_id                = azurerm_lb.web-lb.id
   name                           = "${local.resource_name_prefix}-web-lb-rule"
-  protocol                       = "TCP"
+  protocol                       = "Tcp"
   probe_id = azurerm_lb_probe.wen-lb-probe-80.id
 }
 
 resource "azurerm_network_interface_backend_address_pool_association" "web-nic-lb-associate" {
   backend_address_pool_id = azurerm_lb_backend_address_pool.web-lb-bepool.id
-  ip_configuration_name   = azurerm_network_interface.web_linux_vm_nic.ip_configuration.name
+  ip_configuration_name   = azurerm_network_interface.web_linux_vm_nic.ip_configuration[0].name
   network_interface_id    = azurerm_network_interface.web_linux_vm_nic.id
 }
 
