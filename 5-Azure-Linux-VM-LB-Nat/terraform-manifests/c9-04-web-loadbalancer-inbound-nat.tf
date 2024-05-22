@@ -1,6 +1,6 @@
 resource "azurerm_lb_nat_rule" "web_lb_inbound_nat_rule" {
   backend_port                   = 22
-  frontend_ip_configuration_name = azurerm_lb.web-lb.frontend_ip_configuration
+  frontend_ip_configuration_name = azurerm_lb.web-lb.frontend_ip_configuration[0].name
   loadbalancer_id                = azurerm_lb.web-lb.id
   name                           = "ssh-1022-vm-22"
   protocol                       = "Tcp"
