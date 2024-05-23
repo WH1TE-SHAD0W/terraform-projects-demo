@@ -1,7 +1,3 @@
-locals {
-  ports = [for i in range(var.web_linux_vm_count) : "${i}022"]
-}
-
 resource "azurerm_lb_nat_rule" "web_lb_inbound_nat_rule" {
   count                          = var.web_linux_vm_count
   backend_port                   = 22
