@@ -15,6 +15,16 @@ variable "web_subnet_name" {
   default = "web-subnet"
 }
 
+variable "web_inbound_ports" {
+  description = "Web server inbound ports"
+  type = map(string)
+  default = {
+    "100" : "80",
+    "110" : "443",
+    "130" : "22"
+  }
+}
+
 variable "web_subnet_address" {
   description = "Virtual network web subnet address space"
   type = list(string)
@@ -25,6 +35,16 @@ variable "app_subnet_name" {
   description = "Virtual network app subnet name"
   type = string
   default = "app-subnet"
+}
+
+variable "app_inbound_ports" {
+  description = "App inbound ports"
+  type = map(string)
+  default = {
+    "100" : "80",
+    "110" : "443",
+    "130" : "22",
+  }
 }
 
 variable "app_subnet_address" {
@@ -39,6 +59,14 @@ variable "db_subnet_name" {
   default = "db-subnet"
 }
 
+variable "db_inbound_ports" {
+  description = "DB inbound ports"
+  type = map(string)
+  default = {
+    "100" : "3306",
+  }
+}
+
 variable "db_subnet_address" {
   description = "Virtual network Database subnet addresses"
   type = list(string)
@@ -49,6 +77,15 @@ variable "bastion_subnet_name" {
   description = "Virtual network bastion subnet name"
   type = string
   default = "bastion-subnet"
+}
+
+variable "bastion_inbound_ports" {
+  description = "Bastion inbound ports"
+  type = map(string)
+  default = {
+    "100" : "22",
+    "110" : "3389"
+  }
 }
 
 variable "bastion_subnet_address" {

@@ -17,15 +17,8 @@ resource "azurerm_subnet_network_security_group_association" "bastion_subnet_nsg
   depends_on = [azurerm_network_security_rule.bastion_nsg_inbound_rule]
 }
 
-locals {
-  bastion_inbound_ports_map = {
-    "100" : "22",
-    "110" : "3389"
-  }
-}
-
 resource "azurerm_network_security_rule" "bastion_nsg_inbound_rule" {
-  for_each = local.bastion_inbound_ports_map
+  for_each = var.bastion_inbound_ports
     name                        = "Rule-Port-${each.value}"
     priority                    = each.key
     direction                   = "Inbound"

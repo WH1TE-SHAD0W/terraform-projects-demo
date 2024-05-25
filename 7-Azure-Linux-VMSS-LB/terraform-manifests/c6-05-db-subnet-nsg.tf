@@ -16,16 +16,8 @@ resource "azurerm_subnet_network_security_group_association" "db_subnet_nsg_asso
   subnet_id                 = azurerm_subnet.db-subnet.id
 }
 
-locals {
-  db_inbound_ports_map = {
-    "100" : "3306", # If the key starts with a number, you must use the colon syntax ":" instead of "="
-    "110" : "1433",
-    "120" : "5432"
-  }
-}
-
 resource "azurerm_network_security_rule" "db_nsg_inbound_rule" {
-    for_each = local.db_inbound_ports_map
+    for_each = var.db_inbound_ports
     name                        = "Rule-Port-${each.value}"
     priority                    = each.key
     direction                   = "Inbound"

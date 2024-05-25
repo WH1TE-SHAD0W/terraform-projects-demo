@@ -17,16 +17,8 @@ resource "azurerm_subnet_network_security_group_association" "web_subnet_nsg_ass
   depends_on = [azurerm_network_security_rule.web_nsg_inbound_rule]
 }
 
-locals {
-  web_inbound_ports = {
-    "100" : "80",
-    "110" : "443",
-    "120" : "22",
-   }
-}
-
 resource "azurerm_network_security_rule" "web_nsg_inbound_rule" {
-  for_each = local.web_inbound_ports
+  for_each = var.web_inbound_ports
     name                        = "Rule-Port-${each.value}"
     priority                    = each.key
     direction                   = "Inbound"

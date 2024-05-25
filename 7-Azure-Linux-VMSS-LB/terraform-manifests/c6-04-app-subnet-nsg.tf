@@ -17,17 +17,9 @@ resource "azurerm_subnet_network_security_group_association" "app_subnet_nsg_ass
   depends_on = [azurerm_network_security_rule.app_nsg_inbound_rule]
 }
 
-locals {
-  app_inbound_ports_map = {
-    "100" : "80", # If the key starts with a number, you must use the colon syntax ":" instead of "="
-    "110" : "443",
-    "120" : "8080",
-    "130" : "22"
-  }
-}
 
 resource "azurerm_network_security_rule" "app_nsg_inbound_rule" {
-    for_each = local.app_inbound_ports_map
+    for_each = var.app_inbound_ports
     name                        = "Rule-Port-${each.value}"
     priority                    = each.key
     direction                   = "Inbound"
