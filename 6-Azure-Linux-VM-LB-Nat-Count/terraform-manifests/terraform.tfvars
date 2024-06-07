@@ -12,7 +12,7 @@ web_subnet_address = ["10.1.1.0/24"]
 app_subnet_name = "app-subnet"
 app_subnet_address = ["10.1.2.0/24"]
 
-db_subnet_name = "db-subnet"
+db_subnet_name = "db_subnet"
 db_subnet_address = ["10.1.3.0/24"]
 
 bastion_subnet_name = "bastion-subnet"

@@ -36,7 +36,7 @@ variable "app_subnet_address" {
 variable "db_subnet_name" {
   description = "Virtual network Database subnet name"
   type = string
-  default = "db-subnet"
+  default = "db_subnet"
 }
 
 variable "db_subnet_address" {

@@ -1,5 +1,9 @@
-variable "web_linux_vm_count" {
-  description = "Number of vms created"
-  default     = 1
-  type        = number
+variable "web_vmss_inbound_ports" {
+  description = "Inbound ports for vmss"
+  type        = map(string)
+  default     = {
+    "100" : "80",
+    "110" : "443",
+    "130" : "22",
+  }
 }

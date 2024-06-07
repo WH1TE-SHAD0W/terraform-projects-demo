@@ -38,4 +38,8 @@ bastion_inbound_ports = {
   }
 bastion_subnet_address = ["10.1.100.0/24"]
 
-web_linux_vm_count = 4
+web_vmss_inbound_ports = {
+    "100" : "80",
+    "110" : "443",
+    "130" : "22",
+  }

@@ -38,10 +38,10 @@ resource "azurerm_lb_rule" "web-lb-rule" {
   probe_id = azurerm_lb_probe.wen-lb-probe-80.id
 }
 
-resource "azurerm_network_interface_backend_address_pool_association" "web-nic-lb-associate" {
-  count                   = var.web_linux_vm_count
-  backend_address_pool_id = azurerm_lb_backend_address_pool.web-lb-bepool.id
-  ip_configuration_name   = element(azurerm_network_interface.web_linux_vm_nic[*].ip_configuration[0].name, count.index)
-  network_interface_id    = element(azurerm_network_interface.web_linux_vm_nic[*].id, count.index)
-}
+# resource "azurerm_network_interface_backend_address_pool_association" "web-nic-lb-associate" {
+#   count                   = var.web_linux_vm_count
+#   backend_address_pool_id = azurerm_lb_backend_address_pool.web-lb-bepool.id
+#   ip_configuration_name   = element(azurerm_network_interface.web_linux_vm_nic[*].ip_configuration[0].name, count.index)
+#   network_interface_id    = element(azurerm_network_interface.web_linux_vm_nic[*].id, count.index)
+# }
 
