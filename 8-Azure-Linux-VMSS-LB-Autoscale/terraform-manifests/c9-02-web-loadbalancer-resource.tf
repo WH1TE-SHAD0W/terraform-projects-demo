@@ -4,6 +4,7 @@ resource "azurerm_public_ip" "web-lb-public-ip" {
   name                = "${local.resource_name_prefix}-web-lb-public-ip"
   resource_group_name = azurerm_resource_group.rg.name
   sku = "Standard"
+  domain_name_label = "marek-culak-lb-vmss"
 }
 
 resource "azurerm_lb" "web-lb" {
