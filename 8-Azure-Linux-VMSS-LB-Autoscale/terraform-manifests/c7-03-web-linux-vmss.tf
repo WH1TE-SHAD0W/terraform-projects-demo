@@ -1,5 +1,6 @@
 locals {
-  web_vm_custom_data = <<CUSTOM_DATA
+  web_vm_custom_data =
+  <<CUSTOM_DATA
   #!/bin/sh
   sudo apt update -y
   sudo apt install -y apache2
@@ -12,7 +13,7 @@ locals {
   echo "Welcome to Marek Culak website - WebVM App1 - VM Hostname: $(hostname)" | sudo tee /var/www/html/app1/hostname.html
   echo "Welcome to Marek Culak website - WebVM App1 - App Status Page" | sudo tee /var/www/html/app1/status.html
   echo '<!DOCTYPE html> <html> <body style="background-color:rgb(250, 210, 210);"> <h1>Welcome to Marek Culak website - WebVM APP-1 </h1> <p>Terraform Demo</p> <p>Application Version: V1</p> </body></html>' | sudo tee /var/www/html/app1/index.html
-  sudo curl -H "Metadata:true" --noproxy "*" "http://marek-culak-lb-vmss/metadata/instance?api-version=2020-09-01" -o /var/www/html/app1/metadata.html
+  sudo curl -H "Metadata:true" --noproxy "*" "http://http://marek-culak-lb-vmss.westeurope.cloudapp.azure.com/metadata/instance?api-version=2020-09-01" -o /var/www/html/app1/metadata.html
   CUSTOM_DATA
 }
 

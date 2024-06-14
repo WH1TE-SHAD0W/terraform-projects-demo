@@ -35,18 +35,7 @@ resource "azurerm_lb_rule" "web-lb-rule" {
   loadbalancer_id                = azurerm_lb.web-lb.id
   name                           = "${local.resource_name_prefix}-web-lb-rule"
   protocol                       = "Tcp"
-  probe_id                       = azurerm_lb_probe.wen-lb-probe-80.id
-  disable_outbound_snat          = true
-}
-
-resource "azurerm_lb_outbound_rule" "lb-internet-access" {
-  backend_address_pool_id = azurerm_lb_backend_address_pool.web-lb-bepool.id
-  loadbalancer_id         = azurerm_lb.web-lb.id
-  name                    = "lb-internet-access"
-  protocol                = "All"
-  frontend_ip_configuration {
-    name = azurerm_lb.web-lb.frontend_ip_configuration[0].name
-  }
+  probe_id = azurerm_lb_probe.wen-lb-probe-80.id
 }
 
 resource "azurerm_network_interface_backend_address_pool_association" "web-nic-lb-associate" {
